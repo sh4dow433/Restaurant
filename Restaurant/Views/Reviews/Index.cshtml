@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Restaurant.Models.Review>
+@section Scripts
+{
+    <script src="@Url.Content("~/js/skip-header.js")"></script>
+}
+@{
+    int currentPage = (int)ViewBag.PageNumber;
+    bool hasNext = (bool)ViewBag.HasNext;
+    bool hasPrev = (bool)ViewBag.HasPrevious;
+}
+<h2 class="text-center text-secondary mt-5 mx-5 p-3">Reviews</h2>
+
+<div class="container mx-auto">
+    <a class="btn btn-success btn-block mb-4 mt-2" asp-controller="Reviews" asp-action="Create">Write a review</a>
+    @if (Model.Count() > 0)
+    {
+        @foreach (var obj in Model)
+        {
+            <div class="row mt-2">
+                <div class="col text-left text-dark font-big">@obj.Name</div>
+                <div class="col-2 text-right text-info">@obj.Date</div>
+            </div>
+            <div class="row">
+                <div class="col text-secondary font-medium">
+                    @obj.Comment
+                </div>
+            </div>
+            <hr />
+        }
+    }
+    else
+    {
+        <div class="text-center text-secondary p-5"> No review was found. </div>
+    }
+    <div class="row pb-5">
+        <div class="col-xs-5 col-lg-5">
+            <a class="btn btn-info float-right btn-block @(hasPrev == false ? "disabled" : "" )" asp-action="Index" asp-route-pageNumber="@(currentPage-1)">Previous</a>
+        </div>
+        <div class="col-xs-2 col-lg-2 p-1 text-center text-info">@currentPage</div>
+        <div class="col-xs-5 col-lg-5">
+            <a class="btn btn-info float-right btn-block @(hasNext == false ? "disabled" : "" )" asp-action="Index" asp-route-pageNumber="@(currentPage+1)">Next</a>
+        </div>
+    </div>
+
+</div>

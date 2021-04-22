@@ -1,0 +1,47 @@
+﻿@model Restaurant.Models.Table;
+@section Scripts
+{
+    <script src="@Url.Content("~/js/skip-header.js")"></script>
+}
+
+<form method="post" class="mx-5 pb-5" asp-action="CreateTable">
+    <div class="border-bottom container p-3 mx-auto pb-5">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <h3 class="text-info pl-5">Add Table</h3>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-3 text-center">
+                        <label asp-for="TablesNumber"></label>
+                    </div>
+                    <div class="col-9">
+                        <input asp-for="TablesNumber" min="1" class="form-control" />
+                        <span asp-validation-for="TablesNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3 text-center">
+                        <label asp-for="NumberOfChairs"></label>
+                    </div>
+                    <div class="col-9">
+                        <input asp-for="NumberOfChairs" min="2" class="form-control" />
+                        <span asp-validation-for="NumberOfChairs" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-9 offset-3 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-success w-100" value="Create" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-info w-100">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Restaurant.Models.Review>
+@section Scripts
+{
+    <script src="@Url.Content("~/js/skip-header.js")"></script>
+}
+
+
+<div class="container mx-auto pb-5">
+    <h3 class="text-secondary text-center"> Reviews</h3>
+    @if (Model.Count() > 0)
+    {
+        @foreach (var obj in Model)
+        {
+            <div class="row mt-2">
+                <div class="col text-left text-dark font-big">@obj.Name</div>
+                <div class="col-2 text-right text-info">@obj.Date</div>
+            </div>
+            <div class="row">
+                <div class="col text-secondary font-medium">
+                    @obj.Comment
+                </div>
+                <div class="col-2">
+                    <a class="text-danger" asp-controller="Admin" asp-action="DeleteReview" asp-route-id="@obj.Id">Delete</a>
+                </div>
+            </div>
+            <hr />
+        }
+    }
+    else
+    {
+        <div class="text-center text-secondary p-5"> No review was found. </div>
+    }
+</div>

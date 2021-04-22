@@ -1,0 +1,79 @@
+﻿@model Restaurant.Models.Booking;
+@section Scripts
+{
+    <script src="@Url.Content("~/js/skip-header.js")"></script>
+}
+@{
+    string hour;
+    switch (ViewBag.Hour)
+    {
+        case Hour.h18:
+            hour = "18:00";
+            break;
+        case Hour.h19_30:
+            hour = "19:30";
+            break;
+        case Hour.h21:
+            hour = "21:00";
+            break;
+        case Hour.h22_30:
+            hour = "22:30";
+            break;
+        case Hour.h24:
+            hour = "24:00";
+            break;
+        default:
+            hour = "18:00";
+            break;
+    }
+}
+
+<div class="container mx-auto mt-5 p-4 pb-5">
+    <h3 class="text-info pb-2">Check your reservation</h3>
+    <form action="/Booking/Check" class="pb-lg-5" method="get">
+        <div class="form-row">
+            <div class="form-group col-xs-5 col-lg-5">
+                <label for="id" class="text-secondary">Enter your reservation ID:</label>
+                <input type="number" name="id" class="form-control" id="id" placeholder="id">
+            </div>
+            <div class="form-group col-xs-3 col-lg-3">
+                <input class="mt-4 btn btn-outline-info" type="submit" value="Check Reservation" />
+            </div>
+        </div>
+        <hr />
+    </form>
+
+    @if (Model == null)
+    {
+        <h4 class="text-secondary">Your reservation couldn't be found!</h4>
+        <p class="text-secondary">Make sure that the ID is correct.</p>
+    }
+    else
+    {
+        <h4 class="text-secondary">Your reservation details</h4>
+        <div class="row">
+            <div class="text-secondary col-xs-3 col-lg-3 font-weight-bold"> Reservation's ID:</div>
+            <div class="text-dark col-xs-9 col-lg-9 font-weight-bold">@Model.Id</div>
+        </div>
+        <div class="row">
+            <div class="text-secondary col-xs-3 col-lg-3"> Name:</div>
+            <div class="text-dark col-xs-9 col-lg-9">@Model.FullName</div>
+        </div>
+        <div class="row">
+            <div class="text-secondary col-xs-3 col-lg-3"> Date:</div>
+            <div class="text-dark col-xs-9 col-lg-9">@Model.DateTime.ToString("yyyy-MM-dd")</div>
+        </div>
+        <div class="row">
+            <div class="text-secondary col-xs-3 col-lg-3"> Hour:</div>
+            <div class="text-dark col-xs-9 col-lg-9">@hour</div>
+        </div>
+        <div class="row">
+            <div class="text-secondary col-xs-3 col-lg-3"> Number of persons:</div>
+            <div class="text-dark col-xs-9 col-lg-9">@Model.NumberOfGuests</div>
+        </div>
+        <div class="row">
+            <div class="text-secondary col-xs-3 col-lg-3">Table's Number:</div>
+            <div class="text-dark col-xs-9 col-lg-9">@Model.Table.TablesNumber</div>
+        </div>
+    }
+</div>

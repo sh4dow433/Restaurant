@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Restaurant</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+    <div class="splash" id="top">
+        <header id="title" class="container text-center text-secondary p-5">
+            <div class="row">
+                <div class="col">
+                    <h1>Restaurant's Name</h1>
+                </div>
+            </div>
+            <div class="row m-auto">
+                <div class="col">
+                    <a href="#main" class="btn btn-block btn-outline-info mt-2">Scroll Down</a>
+                </div>
+                <div class="col">
+                    <a asp-controller="Booking" asp-action="Index" class="btn btn-info btn-block mt-2">Book a Table</a>
+                </div>
+            </div>
+        </header>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav m-auto" id="navbar">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="nav-item nav-link mx-4 text-danger" asp-controller="Admin" asp-action="Logout">Back to the site</a>
+                    <a class="nav-item nav-link mx-4" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                    <a class="nav-item nav-link mx-4" asp-controller="Admin" asp-action="Booking">Bookings</a>
+                    <a class="nav-item nav-link mx-4" asp-controller="Admin" asp-action="Table">Tables</a>
+                    <a class="nav-item nav-link mx-4" asp-controller="Admin" asp-action="Review">Reviews</a>
+                }
+                else
+                {
+                    <a class="nav-item nav-link mx-4 @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active text-info" : "")" asp-area="" asp-controller="Home" asp-action="Index">About Us</a>
+                    <a class="nav-item nav-link mx-4 @(ViewContext.RouteData.Values["Action"].ToString() == "Menus" ? "active text-info" : "")" asp-area="" asp-controller="Home" asp-action="Menus">Menus</a>
+                    <a class="nav-item nav-link mx-4 @(ViewContext.RouteData.Values["Controller"].ToString() == "Booking" ? "active text-info" : "")" asp-area="" asp-controller="Booking" asp-action="Index">Book A Table</a>
+                    <a class="nav-item nav-link mx-4 @(ViewContext.RouteData.Values["Action"].ToString() == "Bar" ? "active text-info" : "")" asp-area="" asp-controller="Home" asp-action="Bar">Bar</a>
+                    <a class="nav-item nav-link mx-4 @(ViewContext.RouteData.Values["Controller"].ToString() == "Reviews" ? "active text-info" : "")" asp-area="" asp-controller="Reviews" asp-action="Index" asp-route-pageNumber="0">Reviews</a>
+                }
+            </div>
+        </div>
+    </nav>
+    <div class="main bg-muted pt-5" id="main">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="center" id="footer-image">
+            <a href="#top" class="btn btn-lg btn-outline-info"> Go Top</a>
+        </div>
+        <div class="bg-info container-fluid p-5">
+            <div class="row">
+                <div class="col border-right text-light text-center">
+                    <h6><u>Location</u></h6>
+                    <p>
+                        City:
+                        <br>
+                        Street:
+
+                    </p>
+                </div>
+                <div class="col text-light border-right text-center">
+                    <h6><u>Contact</u></h6>
+                    <p>
+                        Email:
+                        <br>
+                        Phone:
+                    </p>
+                </div>
+                <div class="col text-light text-center">
+                    <h6><u>Other</u></h6>
+                    <p>
+                        Copyright: RestaurantsName
+                        <br>
+                        2020-2021
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

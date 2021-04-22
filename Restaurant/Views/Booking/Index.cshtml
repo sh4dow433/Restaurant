@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@section Scripts
+{
+    <script src="@Url.Content("~/js/skip-header.js")"></script>
+}
+<div class="container mx-auto mt-5 p-4">
+    <h3 class="text-info pb-2">Book a table now</h3>
+    <form action="/Booking/Create" class="" method="get">
+        <div class="form-row">
+            <div class="form-group col-xs-3 col-lg-3">
+                <label for="numberOfPersons" class="text-secondary">Number Of Persons</label>
+                <input type="number" name="numberOfPersons" class="form-control" id="numberOfPersons" placeholder="no. of persons" min="1" value="2">
+            </div>
+            <div class="form-group col-xs-3 col-lg-3">
+                <label for="date" class="text-secondary">Date</label>
+                <input type="date" name="date" class="form-control" id="date" min="@(DateTime.Today.ToString("yyyy-MM-dd"))" value="@(DateTime.Today.ToString("yyyy-MM-dd"))">
+            </div>
+            <div class="form-group col-xs-3 col-lg-3">
+                <label for="hour" class="text-secondary">Hour</label>
+                <select class="form-control" name="hour" id="hour">
+                    <option value="0">18:00</option>
+                    <option value="1">19:30</option>
+                    <option value="2">21:00</option>
+                    <option value="3">22:30</option>
+                    <option value="4">24:00</option>
+                </select>
+            </div>
+            <div class="form-group col-xs-3 col-lg-3">
+                <input class="mt-4 btn btn-block btn-success" type="submit" value="Check Date" />
+            </div>
+        </div>
+    </form>
+    <h5 class="text-secondary mt-5">Or you can check your reservation here:</h5>
+    <form action="/Booking/Check" class="pb-lg-5" method="get">
+        <div class="form-row">
+            <div class="form-group col-xs-5 col-lg-5">
+                <label for="id" class="text-secondary">Enter your reservation ID:</label>
+                <input type="number" name="id" class="form-control" id="id" placeholder="id">
+            </div>
+            <div class="form-group col-xs-3 col-lg-3">
+                <input class="mt-4 btn btn-outline-info" type="submit" value="Check Reservation" />
+            </div>
+        </div>
+        <hr />  
+    </form>
+</div>

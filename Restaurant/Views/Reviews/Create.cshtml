@@ -1,0 +1,50 @@
+﻿@model Restaurant.Models.Review
+
+@section Scripts
+{
+    <script src="@Url.Content("~/js/skip-header.js")"></script>
+}
+
+<form method="post" class="mx-5 pb-5" asp-action="Create">
+    <div class="border-bottom container p-3 mx-auto pb-5">
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+        <div class="form-group row">
+            <h3 class="text-info pl-5">Add Review</h3>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-3 text-center">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-9">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row ">
+                    <div class="col-3 text-center">
+                        <label asp-for="Comment"></label>
+                    </div>
+                    <div class="col-9">
+                        <textarea asp-for="Comment" class="form-control" rows="5" placeholder=" ">
+                        </textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-9 offset-3 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-success w-100" value="Create" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-info w-100">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

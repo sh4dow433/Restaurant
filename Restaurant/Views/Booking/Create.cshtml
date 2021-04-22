@@ -1,0 +1,138 @@
+﻿@model Restaurant.Models.CreateBookingModel
+@{
+    int hour, numberOfPersons;
+    string date;
+
+    //hour
+    if (ViewBag.Hour != null)
+    {
+        hour = (int)ViewBag.Hour;
+    }
+    else
+    {
+        hour = 0;
+    }
+        
+    //date
+    if (ViewBag.Date != null)
+    {
+        date = ViewBag.Date.ToString("yyyy-MM-dd");
+    }
+    else
+    {
+        date = DateTime.Today.ToString("yyyy-MM-dd");
+    }
+
+    //no of persons
+    if (ViewBag.NumberOfPersons != null)
+    {
+        numberOfPersons = ViewBag.NumberOfPersons;
+    }
+    else
+    {
+        numberOfPersons = 1;
+    }
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/js/skip-header.js")"></script>
+    <script>
+        var hour = @(hour);
+        $("#select").val(hour);
+    </script>
+}
+
+
+<form method="post" class="mx-5 pb-5 text-secondary" asp-action="Create">
+    <div class="border-bottom container p-3 mx-auto pb-5">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <h3 class="text-info pl-5">Book a table</h3>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-3 text-center">
+                        <label asp-for="LastName"></label>
+                    </div>
+                    <div class="col-9">
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3 text-center">
+                        <label asp-for="FirstName"></label>
+                    </div>
+                    <div class="col-9">
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3 text-center">
+                        <label asp-for="Email"></label>
+                    </div>
+                    <div class="col-9">
+                        <input type="email" asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3 text-center">
+                        <label asp-for="PhoneNumber"></label>
+                    </div>
+                    <div class="col-9">
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3 text-center">
+                        <label asp-for="NumberOfGuests"></label>
+                    </div>
+                    <div class="col-9">
+                        <input type="number" asp-for="NumberOfGuests" class="form-control" min="1" value="@(numberOfPersons)" />
+                        <span asp-validation-for="NumberOfGuests" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3 text-center">
+                        <label asp-for="Date" class="text-secondary"></label>
+                    </div>
+                    <div class="col-9">
+                        <input type="date" asp-for="Date" class="form-control" id="date" min="@(DateTime.Today.ToString("yyyy-MM-dd"))" value="@(date)">
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3 text-center">
+                        <label asp-for="Hour"></label>
+                    </div>
+                    <div class="col-9">
+                        <select id="select" asp-for="Hour" class="form-control">
+                            <option value="0">18:00</option>
+                            <option value="1">19:30</option>
+                            <option value="2">21:00</option>
+                            <option value="3">22:30</option>
+                            <option value="4">24:00</option>
+                        </select>
+                        <span asp-validation-for="Hour" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-9 offset-3 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-success w-100" value="Create" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-info w-100">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
